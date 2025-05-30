@@ -1,39 +1,14 @@
-const form = document.getElementById("form");
-const errMsg = document.getElementById("errMsg");
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
 
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
+    // Simple form validation and submission
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const message = document.getElementById("message").value.trim();
-
-    if (!name || !email || !message) {
-        errMsg.textContent = "All fields are required.";
-        return;
+    if (name && email && message) {
+        alert(`Thank you for your message, ${name}! I will get back to you soon.`);
+        // Here you would implement functionality to send messages to an API
+        document.getElementById('contact-form').reset(); // Reset the form after submission
     }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        errMsg.textContent = "Please enter a valid email.";
-        return;
-    }
-
-    errMsg.textContent = "";
-    alert("Form submitted successfully!");
-    form.reset();
 });
-
-function addTask() {
-    const input = document.getElementById("taskInput");
-    const task = input.value.trim();
-    if (task === "") return;
-}
-const li = document.createElement("li");
-li.innerHTML = `${task} <button onclick="removeTask(this)">Delete</button>`;
-document.getElementById("taskList").appendChild(li);
-input.value = "";
-
-function removeTask(btn) {
-    btn.parentElement.remove();
-}
